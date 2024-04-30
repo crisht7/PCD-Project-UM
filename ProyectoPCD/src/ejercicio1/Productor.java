@@ -5,7 +5,7 @@ public class Productor implements Runnable {
 	@Override
 	public void run() {
 		Random random = new Random();
-		for (int i = 0; i < Main.NUM_BLOCKS; i++) {
+		for (int i = 0; i < Main.NUM_BLOQUES; i++) {
 			for (int j = 0; j < Main.TAM_BLOQUE; j++) {
 				Main.cerrojo.lock();
 				try {

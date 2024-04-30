@@ -6,7 +6,7 @@ public class Main {
     static final int NUM_CONSUMIDORES = 10;
     static final int TAM_ARRAY = 110;
     static final int TAM_BLOQUE = 11;
-    static final int NUM_BLOCKS = TAM_ARRAY / TAM_BLOQUE;
+    static final int NUM_BLOQUES = TAM_ARRAY / TAM_BLOQUE;
     
     static final int[] array = new int[TAM_ARRAY];
     static final int[] solucion = new int[NUM_CONSUMIDORES];
