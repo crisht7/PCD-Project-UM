@@ -1,70 +1,48 @@
 package ejercicio2;
 
-import java.util.concurrent.Semaphore;
-
 public class Turno extends Thread {
-
-	public static Semaphore peaton;
-	public static Semaphore NorteSur;
-	public static Semaphore EsteOeste;
-
-	public static final int MAXNS = 4;
-	public static final int MAXEO = 4;
-	public static final int MAXP = 10;
-	public static final int DEFAULT = 0;
-
-	public Turno() {
-		Turno.peaton = new Semaphore(Turno.DEFAULT);
-		Turno.NorteSur = new Semaphore(Turno.DEFAULT);
-		Turno.EsteOeste = new Semaphore(Turno.DEFAULT);
-	}
-
-	public void pasoNorteSur() {
-		Turno.NorteSur = new Semaphore(Turno.MAXNS);
-
-	}
-
-	public void pasoEsteOeste() {
-		Turno.EsteOeste = new Semaphore(Turno.MAXEO);
-	}
-
-	public void pasoPeatones() {
-		Turno.peaton = new Semaphore(Turno.MAXP);
-	}
 	public void run() {
-		/*
-		 * Este método lo que hace es volver a crear los semaforos a unos con el numero de permisos igual
-		 * al numero de coches o peatones que pueden  haber en la calzada
-		 * cuando acaba el tiempo de un semaforo recoge todos sus permisos y lo cambia por uno  sin permisos disponibles
-		 * y así mientras la variable global x no indique el final del programa
-		 * */
-		Vehiculo.generarVehiculo();
-		//TODO lanzar peatones
-		
-		while(true) {
+		while (true) {
+
+			// Incrementamos el turno actual 
+			Main.turnoActual = (Main.turnoActual + 1) % 3;
+			
 			try {
-				System.out.println("Norte-Sur en verde");
-				this.pasoNorteSur();
-				Thread.sleep(500);
-				System.out.println("Norte-Sur en rojo");
-				Turno.NorteSur.drainPermits(); //resetea permisos
-				Turno.NorteSur = new Semaphore(Turno.DEFAULT);
-				System.out.println("Este-Oeste en verde");
-				this.pasoEsteOeste();
-				Thread.sleep(500);
-				System.out.println("Este-Oeste en rojo");
-				Turno.EsteOeste.drainPermits();
-				Turno.EsteOeste = new Semaphore(Turno.DEFAULT);
-				System.out.println("Peatones en verde");
-				this.pasoPeatones();
-				Thread.sleep(500);
-				System.out.println("Peatones en rojo");
-				Turno.peaton.drainPermits();
-				Turno.peaton = new Semaphore(Turno.DEFAULT);
+				Main.sMutex.acquire(); // Adquiere el semáforo mutex
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			// Verifica si es el turno de los peatones y no hay otros eventos ocurriendo
+			if (Main.turnoActual == Main.TURNO_PEATON && Main.PeatonesEsperando > 0 && Main.nPeatones <= 0 && Main.nVehiculosEO <= 0 && Main.nVehiculosNS <= 0){ 
+				Main.sPeatones.release(); 
+			}
+			// Verifica si es el turno de los vehículos en dirección norte-sur y no hay otros eventos ocurriendo
+			else if (Main.turnoActual == Main.TURNO_NS && Main.VehiculosNSEsperando > 0 && Main.nPeatones <= 0 && Main.nVehiculosEO <= 0 & Main.nVehiculosNS <= 0){ 
+				Main.sNS.release(); 
+			}
+			// Verifica si es el turno de los vehículos en dirección este-oeste y no hay otros eventos ocurriendo
+			else if(Main.turnoActual == Main.TURNO_EO && Main.VehiculosEOEsperando > 0 && Main.nPeatones <= 0 && Main.nVehiculosEO <= 0 && Main.nVehiculosNS <= 0){ 
+				Main.sEO.release(); 
+			}else{ 
+				Main.sMutex.release(); 
+			}
+			
+			try {
+				Main.sMutexPantalla.acquire(); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			Main.imprimirPantalla(Main.turnoActual); 
+			
+			Main.sMutexPantalla.release(); 
+			
+			try {
+				sleep(Main.DURACION_SEMAFORO); 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
 }
