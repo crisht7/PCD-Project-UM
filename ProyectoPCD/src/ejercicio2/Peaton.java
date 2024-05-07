@@ -1,5 +1,9 @@
 package ejercicio2;
 
+/**
+ * La clase Peaton representa a un peatón que cruza una calle controlada por un semáforo.
+ * Extiende la clase Thread para poder ejecutarse en un hilo separado.
+ */
 public class Peaton extends Thread{
 	@Override
 	public void run() {
@@ -41,7 +45,7 @@ public class Peaton extends Thread{
 				e.printStackTrace();
 			}
 
-			System.out.println("Cruza peatón.");
+			System.out.println("Cruzando peatón.");
 
 			Main.sMutexPantalla.release();
 
@@ -63,7 +67,7 @@ public class Peaton extends Thread{
 			Main.nPeatones--;
 			
 			// Siguen peatones
-			if (Main.turnoActual == Main.TURNO_PEATON && Main.PeatonesEsperando > 0 && Main.PeatonesEsperando > 0){ 
+			if (Main.turnoActual == Main.TURNO_PEATON && Main.PeatonesEsperando > 0 && Main.nPeatones < Main.MAX_PEATONES) { 
 				Main.sPeatones.release(); 
 			}
 			// Turno vehículos N-S
@@ -78,7 +82,7 @@ public class Peaton extends Thread{
 					Main.sMutex.release(); }
 			try {
 				sleep(Main.INTENTO_PEATON);
-				// sleep(8000)
+				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

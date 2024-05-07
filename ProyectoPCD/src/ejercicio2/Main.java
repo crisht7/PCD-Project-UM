@@ -2,8 +2,12 @@ package ejercicio2;
 
 import java.util.concurrent.Semaphore;
 
-
-
+/**
+ * La clase Main es la clase principal del programa. 
+ * Contiene el método main que inicia la ejecución del programa.
+ * También contiene constantes, variables globales y semáforos utilizados en el programa.
+ * Además, tiene métodos para imprimir el turno actual en la consola.
+ */
 public class Main {
 
 	//Constantes

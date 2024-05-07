@@ -2,6 +2,17 @@ package ejercicio1;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * La clase Main es la clase principal del programa. Contiene el método main que inicia la ejecución del programa.
+ * 
+ * El programa consta de un productor que llena un array con números enteros y varios consumidores que toman bloques de números del array y los suman.
+ * Al final, un sumador suma los resultados de los consumidores y muestra el resultado final.
+ * 
+ * El programa utiliza un cerrojo (ReentrantLock) para garantizar la exclusión mutua al acceder al array compartido.
+ * 
+ * Las constantes NUM_CONSUMIDORES, TAM_ARRAY, TAM_BLOQUE y NUM_BLOQUES definen el tamaño del array y el número de consumidores.
+ * 
+ */
 public class Main {
     static final int NUM_CONSUMIDORES = 10;
     static final int TAM_ARRAY = 110;

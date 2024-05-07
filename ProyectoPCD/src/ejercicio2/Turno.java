@@ -1,5 +1,13 @@
 package ejercicio2;
 
+/**
+ * La clase Turno extiende de Thread y representa un hilo que controla el cambio de turnos en un sistema de semáforos.
+ * Cada vez que se ejecuta el hilo, se incrementa el turno actual y se verifica 
+ * si es el turno de los peatones o de los vehículos en una dirección específica.
+ * Si es el turno correspondiente y no hay otros eventos ocurriendo, se libera el 
+ * semáforo correspondiente para permitir el paso de los peatones o vehículos.
+ * Luego, se imprime en pantalla el turno actual y se espera un tiempo determinado antes de repetir el proceso.
+ */
 public class Turno extends Thread {
 	public void run() {
 		while (true) {

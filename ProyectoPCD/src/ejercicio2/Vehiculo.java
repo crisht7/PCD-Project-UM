@@ -1,4 +1,8 @@
 package ejercicio2;
+/**
+ * La clase Vehiculo representa un vehículo que puede cruzar una intersección controlada por semáforos.
+ * Extiende la clase Thread para poder ejecutarse en un hilo separado.
+ */
 public class Vehiculo extends Thread{
 	@Override
 	public void run() {
@@ -35,7 +39,7 @@ public class Vehiculo extends Thread{
 				e.printStackTrace();
 			}
 
-			System.out.println("Cruza vehículo Norte-Sur.");
+			System.out.println("Cruzando vehículo Norte-Sur.");
 			Main.sMutexPantalla.release();
 			
 			try {
@@ -103,7 +107,7 @@ public class Vehiculo extends Thread{
 				e.printStackTrace();
 			}
 
-			System.out.println("Cruza vehículo Este-Oeste.");
+			System.out.println("Cruzando vehículo Este-Oeste.");
 			Main.sMutexPantalla.release();
 			
 			try {

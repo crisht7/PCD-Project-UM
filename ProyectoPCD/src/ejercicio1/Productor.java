@@ -1,6 +1,10 @@
 package ejercicio1;
 import java.util.Random;
 
+/**
+ * Esta clase representa el productor que se encarga de generar elementos y almacenarlos en un array compartido.
+ * Implementa la interfaz Runnable para poder ser ejecutado en un hilo separado.
+ */
 public class Productor implements Runnable {
 	@Override
 	public void run() {
@@ -11,9 +15,8 @@ public class Productor implements Runnable {
 				try {
 					if (j % 2 == 0) {//Nos aseguramos que los elementos se guarden en posiciones pares del array
 						Main.array[i * Main.TAM_BLOQUE + j] = random.nextInt(100); // Números aleatorios entre 0 y 99
-					} else { //Consecuentemente con la condición del if, las operaciones se guardaran de manera alternada con los elementos en posiciones impares
-						// Codificamos operaciones como enteros: 1 = suma, 2 = resta, 3 = multiplicación
-						Main.array[i * Main.TAM_BLOQUE + j] = random.nextInt(3) + 1;
+					} else { 
+						Main.array[i * Main.TAM_BLOQUE + j] = random.nextInt(3) + 1; // Operaciones aleatorias entre 1 y 3
 					}
 					} finally{
 						Main.cerrojo.unlock();
