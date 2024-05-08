@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio1Reentralock;
 
 /**
  * La clase Sumador implementa la interfaz Runnable y se utiliza para sumar los elementos de un array.

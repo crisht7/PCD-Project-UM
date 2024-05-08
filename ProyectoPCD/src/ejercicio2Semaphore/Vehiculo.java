@@ -1,4 +1,4 @@
-package ejercicio2;
+package ejercicio2Semaphore;
 /**
  * La clase Vehiculo representa un vehículo que puede cruzar una intersección controlada por semáforos.
  * Extiende la clase Thread para poder ejecutarse en un hilo separado.

@@ -1,4 +1,4 @@
-package ejercicio1;
+package ejercicio1Reentralock;
 
 /**
  * La clase Consumidor implementa la interfaz Runnable y representa un hilo consumidor.

@@ -1,4 +1,4 @@
-package ejercicio2;
+package ejercicio2Semaphore;
 
 /**
  * La clase Turno extiende de Thread y representa un hilo que controla el cambio de turnos en un sistema de semáforos.

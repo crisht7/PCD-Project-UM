@@ -1,4 +1,4 @@
-package ejercicio3;
+package ejercicio3Monitor;
 
 import java.util.Random;
 

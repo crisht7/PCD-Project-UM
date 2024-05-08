@@ -1,4 +1,4 @@
-package ejercicio2;
+package ejercicio2Semaphore;
 
 /**
  * La clase Peaton representa a un peatón que cruza una calle controlada por un semáforo.

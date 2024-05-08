@@ -1,6 +1,6 @@
-package ejercicio3;
+package ejercicio3Monitor;
 
-import ejercicio3.MonitorCliente.Cliente;;
+import ejercicio3Monitor.MonitorCliente.Cliente;;
 
 /**
  * La clase MainMonitor es la clase principal del programa. 
