@@ -1,4 +1,4 @@
-package ejercicio4MessagePassing;
+package ejercicio4_Cristobal;
 
 import java.util.Random;
 
@@ -49,47 +49,45 @@ public class Controlador extends Thread {
 		s.addSelectable(buzSolicitarPagar, false);
 		s.addSelectable(liberarCajaAsignada, false);
 		s.addSelectable(imprimirPantalla, false);
+        s.addSelectable(liberaPantalla, false);
 		buzSolicitarPagar.setGuardValue(!caja_a_ocupada || !caja_b_ocupada);
 
 		while (true) {
 
 			switch (s.selectOrBlock(true)) {
 			case 1:
-				int i = (int) buzSolicitarCaja.receive();
+				int id = (int) buzSolicitarCaja.receive();
 				Random r = new Random();
 				tiempo_pago = r.nextInt(10) + 1;
 
 				if (tiempo_pago > 5) {
-					cajaAsignada = 'A';
-					buzDevolverCaja[i].send(cajaAsignada);
-
+					cajaAsignada = 'A';	
 				} else {
 					cajaAsignada = 'B';
-					buzDevolverCaja[i].send(cajaAsignada);
 
 				}
+				buzDevolverCaja[id].send(cajaAsignada);
 
 				break;
+
 			case 2:
-				int cajApagar = (int) buzSolicitarPagar.receive();
-				if (cajApagar == 'A' && !caja_a_ocupada) {
+				String cajApagar = (String) buzSolicitarPagar.receive();
+				int personaId = Integer.parseInt(cajApagar.substring(1));
+				char caja = cajApagar.charAt(0);
+
+				if (caja == 'A' && !caja_a_ocupada) {
 					caja_a_ocupada = true;
-					/*String idString = cajApagar.substring(1, cajApagar.length());
-					int id = Integer.parseInt(idString);
-					*/buzPagar[id].send(tiempo_pago);
+					buzPagar[personaId].send(tiempo_pago);
+				} else if (caja == 'B' && !caja_b_ocupada) {
+					caja_b_ocupada = true;
+					buzPagar[personaId].send(tiempo_pago);
 				}
-				if (cajApagar == 'B' && !caja_b_ocupada) {
-					caja_a_ocupada = true;
-					/*String idString = cajApagar.substring(1, cajApagar.length());
-					int id = Integer.parseInt(idString);
-					*/
-					buzPagar[id].send(tiempo_pago);
-				}
+
 				break;
 
 			case 3:
-				char caja = (char) liberarCajaAsignada.receive();
-				setCajaLibre(caja);
+				char cajaLiberada = (char) liberarCajaAsignada.receive();
+				setCajaLibre(cajaLiberada);
 				break;
 
 			case 4:

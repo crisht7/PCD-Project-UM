@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/home/crisht/Escritorio/PCD/messagepassing.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/crisht/Descargas/messagepassing.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

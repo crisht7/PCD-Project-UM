@@ -29,6 +29,7 @@ public class Controlador extends Thread {
 		caja_b_ocupada = false;
 		cajaAsignada = 'C';
 		pantallaLibre = true;
+
 		this.buzDevolverCaja = buzDevolverCaja;
 		this.buzSolicitarCaja = buzSolicitarCaja;
 		this.liberarCajaAsignada = liberarCajaAsignada;
@@ -50,7 +51,7 @@ public class Controlador extends Thread {
 		s.addSelectable(liberarCajaAsignada, false);
 		s.addSelectable(imprimirPantalla, false);
 		s.addSelectable(buzSolicitarPagar, false);
-		
+
 
 		while (true) {
 
@@ -90,7 +91,7 @@ public class Controlador extends Thread {
 				char caja = (char) liberarCajaAsignada.receive();
 				setCajaLibre( caja);
 				break;
-			
+
 
 			case 4:
 				imprimirPantalla.receive();
@@ -102,7 +103,7 @@ public class Controlador extends Thread {
 				pantallaLibre = true;
 				break;
 			}
-			
+
 		}
 
 	}
